@@ -1,4 +1,4 @@
-# MEASURE Labs API
+# MEASURE Labs' Corporate Dei Tracker API
 
 **Making Corporate Accountability Transparent and Accessible**
 
