@@ -1,0 +1,1458 @@
+{
+  "info": {
+    "name": "DEI Tracker API",
+    "description": "Comprehensive API collection for tracking corporate DEI stances, commitments, and changes.\n\n## Features\n- Track which companies back DEI vs. quietly rolling back\n- Monitor commitment status changes\n- Compare companies across industries\n- Research with cited, reliability-scored sources\n\n## Base URL\nhttp://localhost:8000\n\n## Version\nv1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string"
+    },
+    {
+      "key": "api_version",
+      "value": "v1",
+      "type": "string"
+    },
+    {
+      "key": "company_id",
+      "value": "0a4545e1-f3c5-48f6-bf08-e3854524869f",
+      "type": "string",
+      "description": "Apple Inc. ID"
+    },
+    {
+      "key": "profile_id",
+      "value": "fe9d9d74-e604-4608-aac4-e7ae7258c7c4",
+      "type": "string",
+      "description": "Apple profile ID"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health & Info",
+      "item": [
+        {
+          "name": "Root Endpoint",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/",
+              "host": ["{{base_url}}"],
+              "path": [""]
+            },
+            "description": "Get API information and available endpoints"
+          },
+          "response": []
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": ["{{base_url}}"],
+              "path": ["health"]
+            },
+            "description": "Check API health status"
+          },
+          "response": []
+        },
+        {
+          "name": "API Documentation",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/docs",
+              "host": ["{{base_url}}"],
+              "path": ["docs"]
+            },
+            "description": "Interactive Swagger UI documentation"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Companies",
+      "item": [
+        {
+          "name": "List All Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20",
+                  "description": "Items per page (max 100)"
+                }
+              ]
+            },
+            "description": "Get paginated list of all companies"
+          },
+          "response": []
+        },
+        {
+          "name": "List Companies - First 5",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?per_page=5",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "per_page",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Get first 5 companies"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Industry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?industry=Information Technology",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "industry",
+                  "value": "Information Technology"
+                }
+              ]
+            },
+            "description": "Filter companies by industry"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Country",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?country=United States",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "country",
+                  "value": "United States"
+                }
+              ]
+            },
+            "description": "Filter companies by headquarters country"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by State",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?state=California",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "state",
+                  "value": "California"
+                }
+              ]
+            },
+            "description": "Filter companies by headquarters state"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?search=Apple",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Apple",
+                  "description": "Search by company name or ticker"
+                }
+              ]
+            },
+            "description": "Search companies by name or ticker symbol"
+          },
+          "response": []
+        },
+        {
+          "name": "Sort Companies by Name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?sort=name&order=asc",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "name",
+                  "description": "name, ticker, industry, created_at"
+                },
+                {
+                  "key": "order",
+                  "value": "asc",
+                  "description": "asc or desc"
+                }
+              ]
+            },
+            "description": "Sort companies alphabetically"
+          },
+          "response": []
+        },
+        {
+          "name": "Sort Companies by Ticker",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?sort=ticker&order=asc",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "ticker"
+                },
+                {
+                  "key": "order",
+                  "value": "asc"
+                }
+              ]
+            },
+            "description": "Sort companies by ticker symbol"
+          },
+          "response": []
+        },
+        {
+          "name": "Combined Filters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?industry=Health Care&country=United States&sort=name&order=asc",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "industry",
+                  "value": "Health Care"
+                },
+                {
+                  "key": "country",
+                  "value": "United States"
+                },
+                {
+                  "key": "sort",
+                  "value": "name"
+                },
+                {
+                  "key": "order",
+                  "value": "asc"
+                }
+              ]
+            },
+            "description": "Combine multiple filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Company by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/{{company_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "{{company_id}}"]
+            },
+            "description": "Get single company by UUID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Company with Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/{{company_id}}?include=profile",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "{{company_id}}"],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "profile",
+                  "description": "Include related profile data"
+                }
+              ]
+            },
+            "description": "Get company with embedded profile information"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Company by Ticker - AAPL",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/ticker/AAPL",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "ticker", "AAPL"]
+            },
+            "description": "Get Apple by ticker symbol"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Company by Ticker - MSFT",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/ticker/MSFT",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "ticker", "MSFT"]
+            },
+            "description": "Get Microsoft by ticker symbol"
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Search - Single Query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/search/advanced?q=technology",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "search", "advanced"],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "technology"
+                }
+              ]
+            },
+            "description": "Advanced search with query string"
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Search - Multiple Industries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/search/advanced?industries=Information Technology,Health Care",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "search", "advanced"],
+              "query": [
+                {
+                  "key": "industries",
+                  "value": "Information Technology,Health Care",
+                  "description": "Comma-separated industries"
+                }
+              ]
+            },
+            "description": "Search companies in multiple industries"
+          },
+          "response": []
+        },
+        {
+          "name": "Advanced Search - Multiple Countries",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/search/advanced?countries=United States,Canada",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "search", "advanced"],
+              "query": [
+                {
+                  "key": "countries",
+                  "value": "United States,Canada"
+                }
+              ]
+            },
+            "description": "Search companies in multiple countries"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for browsing and searching companies"
+    },
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "List All Profiles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", ""],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get all DEI profiles"
+          },
+          "response": []
+        },
+        {
+          "name": "List Latest Profiles Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/?is_latest=true",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", ""],
+              "query": [
+                {
+                  "key": "is_latest",
+                  "value": "true",
+                  "description": "Only show latest version of each profile"
+                }
+              ]
+            },
+            "description": "Get only the most recent profile versions"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profiles for Company",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/?company_id={{company_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", ""],
+              "query": [
+                {
+                  "key": "company_id",
+                  "value": "{{company_id}}"
+                }
+              ]
+            },
+            "description": "Get all profiles for a specific company"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/{{profile_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", "{{profile_id}}"]
+            },
+            "description": "Get single profile by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile with Sources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/{{profile_id}}?include=sources",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", "{{profile_id}}"],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "sources"
+                }
+              ]
+            },
+            "description": "Get profile with all source citations"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile with Commitments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/{{profile_id}}?include=commitments",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", "{{profile_id}}"],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "commitments"
+                }
+              ]
+            },
+            "description": "Get profile with all DEI commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile with Everything",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/{{profile_id}}?include=sources,commitments",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", "{{profile_id}}"],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "sources,commitments"
+                }
+              ]
+            },
+            "description": "Get complete profile with sources and commitments"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for accessing DEI research profiles"
+    },
+    {
+      "name": "Sources",
+      "item": [
+        {
+          "name": "List All Sources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get all data sources"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Source Type - Corporate Website",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?source_type=corporate_website",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "source_type",
+                  "value": "corporate_website"
+                }
+              ]
+            },
+            "description": "Get official corporate DEI pages"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Source Type - News Articles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?source_type=news_article",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "source_type",
+                  "value": "news_article"
+                }
+              ]
+            },
+            "description": "Get news coverage of DEI initiatives"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Source Type - Regulatory Filings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?source_type=regulatory_filing",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "source_type",
+                  "value": "regulatory_filing"
+                }
+              ]
+            },
+            "description": "Get SEC filings and government documents"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Minimum Reliability - High Quality (4+)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?min_reliability=4",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "min_reliability",
+                  "value": "4",
+                  "description": "1-5 scale, 5 being most reliable"
+                }
+              ]
+            },
+            "description": "Get only high-quality sources"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Minimum Reliability - Highest (5)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?min_reliability=5",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "min_reliability",
+                  "value": "5"
+                }
+              ]
+            },
+            "description": "Get only the most reliable sources"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Publisher",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?publisher=Apple Inc.",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "publisher",
+                  "value": "Apple Inc."
+                }
+              ]
+            },
+            "description": "Filter sources by publisher"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Sources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?search=diversity",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "diversity",
+                  "description": "Search in title and notes"
+                }
+              ]
+            },
+            "description": "Search sources by keywords"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Sources for Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?profile_id={{profile_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "profile_id",
+                  "value": "{{profile_id}}"
+                }
+              ]
+            },
+            "description": "Get all sources for a specific profile"
+          },
+          "response": []
+        },
+        {
+          "name": "Combined Filters - High Quality News",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?source_type=news_article&min_reliability=4",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "source_type",
+                  "value": "news_article"
+                },
+                {
+                  "key": "min_reliability",
+                  "value": "4"
+                }
+              ]
+            },
+            "description": "Get high-quality news articles only"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Source Types Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/types",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", "types"]
+            },
+            "description": "Get breakdown of source types with counts and average reliability"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Source by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/:source_id",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ":source_id"],
+              "variable": [
+                {
+                  "key": "source_id",
+                  "value": "10375cab-ee19-4f66-be3e-fde154c8e28e"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific source"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for exploring documented sources with reliability scores"
+    },
+    {
+      "name": "Commitments",
+      "item": [
+        {
+          "name": "List All Commitments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?page=1&per_page=20",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "per_page",
+                  "value": "20"
+                }
+              ]
+            },
+            "description": "Get all DEI commitments and initiatives"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Status - Active",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?status=active",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "active"
+                }
+              ]
+            },
+            "description": "Get currently active commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Status - Discontinued",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?status=discontinued",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "discontinued",
+                  "description": "Companies backing away from DEI"
+                }
+              ]
+            },
+            "description": "Get discontinued commitments - companies backing away"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Status - Inactive",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?status=inactive",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "inactive"
+                }
+              ]
+            },
+            "description": "Get inactive commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Type - Pledges",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?commitment_type=pledge",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "commitment_type",
+                  "value": "pledge"
+                }
+              ]
+            },
+            "description": "Get specific company pledges"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Type - Industry Initiatives",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?commitment_type=industry_initiative",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "commitment_type",
+                  "value": "industry_initiative"
+                }
+              ]
+            },
+            "description": "Get cross-company industry initiatives"
+          },
+          "response": []
+        },
+        {
+          "name": "Search Commitments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?search=equity",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "equity",
+                  "description": "Search in commitment names"
+                }
+              ]
+            },
+            "description": "Search commitments by keyword"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Commitments for Profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?profile_id={{profile_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "profile_id",
+                  "value": "{{profile_id}}"
+                }
+              ]
+            },
+            "description": "Get all commitments for a specific company profile"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Changed Commitments Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?changed_only=true",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "changed_only",
+                  "value": "true",
+                  "description": "Only show commitments with status changes"
+                }
+              ]
+            },
+            "description": "Get only commitments that have changed status"
+          },
+          "response": []
+        },
+        {
+          "name": "Combined Filters - Active Pledges",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/?status=active&commitment_type=pledge",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ""],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "active"
+                },
+                {
+                  "key": "commitment_type",
+                  "value": "pledge"
+                }
+              ]
+            },
+            "description": "Get active pledges only"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Commitment Types Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/types",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", "types"]
+            },
+            "description": "Get breakdown of commitment types with counts"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Commitment Changes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/changes",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", "changes"]
+            },
+            "description": "Get all commitments that have changed status"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Discontinued Commitments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/changes?change_type=discontinued",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", "changes"],
+              "query": [
+                {
+                  "key": "change_type",
+                  "value": "discontinued",
+                  "description": "Show companies backing away"
+                }
+              ]
+            },
+            "description": "Track companies backing away from DEI"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Reactivated Commitments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/changes?change_type=reactivated",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", "changes"],
+              "query": [
+                {
+                  "key": "change_type",
+                  "value": "reactivated"
+                }
+              ]
+            },
+            "description": "Track companies re-committing to DEI"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Commitment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/:commitment_id",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", ":commitment_id"],
+              "variable": [
+                {
+                  "key": "commitment_id",
+                  "value": "68fe422b-469e-4d15-933e-1d3224343248"
+                }
+              ]
+            },
+            "description": "Get detailed information about a specific commitment with sources"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints for tracking DEI commitments and changes - THE CORE VALUE PROP"
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Platform Overview",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/overview",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "overview"]
+            },
+            "description": "Get overall platform statistics and data summary"
+          },
+          "response": []
+        },
+        {
+          "name": "Industry Statistics",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/industries",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "industries"]
+            },
+            "description": "Get DEI metrics broken down by industry"
+          },
+          "response": []
+        },
+        {
+          "name": "Compare 2 Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/compare?company_ids=0a4545e1-f3c5-48f6-bf08-e3854524869f,e3770756-f606-4436-8355-beb5774590e9",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "compare"],
+              "query": [
+                {
+                  "key": "company_ids",
+                  "value": "0a4545e1-f3c5-48f6-bf08-e3854524869f,e3770756-f606-4436-8355-beb5774590e9",
+                  "description": "Apple vs AbbVie"
+                }
+              ]
+            },
+            "description": "Side-by-side comparison of Apple and AbbVie"
+          },
+          "response": []
+        },
+        {
+          "name": "Compare 3 Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/compare?company_ids={{company_id}},e3770756-f606-4436-8355-beb5774590e9,b507d9b3-b437-4cd1-9b20-5d1c4a4771e5",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "compare"],
+              "query": [
+                {
+                  "key": "company_ids",
+                  "value": "{{company_id}},e3770756-f606-4436-8355-beb5774590e9,b507d9b3-b437-4cd1-9b20-5d1c4a4771e5",
+                  "description": "Apple, AbbVie, Airbnb"
+                }
+              ]
+            },
+            "description": "Compare 3 companies side-by-side"
+          },
+          "response": []
+        },
+        {
+          "name": "Stance Changes - All",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/stance-changes",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "stance-changes"]
+            },
+            "description": "Track all DEI stance changes over time"
+          },
+          "response": []
+        },
+        {
+          "name": "Stance Changes - Decreased Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/stance-changes?change_type=decreased",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "stance-changes"],
+              "query": [
+                {
+                  "key": "change_type",
+                  "value": "decreased",
+                  "description": "Companies backing away"
+                }
+              ]
+            },
+            "description": "Track companies reducing DEI commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "Stance Changes - Increased Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/stance-changes?change_type=increased",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "stance-changes"],
+              "query": [
+                {
+                  "key": "change_type",
+                  "value": "increased"
+                }
+              ]
+            },
+            "description": "Track companies increasing DEI commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "Stance Changes - Last 30 Days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/stance-changes?days=30",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "stance-changes"],
+              "query": [
+                {
+                  "key": "days",
+                  "value": "30",
+                  "description": "Look back period"
+                }
+              ]
+            },
+            "description": "Recent stance changes in last 30 days"
+          },
+          "response": []
+        },
+        {
+          "name": "Industry Trends",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/industry-trends",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "industry-trends"]
+            },
+            "description": "Analyze DEI trends by industry - which industries are backing away vs doubling down"
+          },
+          "response": []
+        }
+      ],
+      "description": "Analytics endpoints for tracking trends and comparing companies"
+    },
+    {
+      "name": "Real-World Use Cases",
+      "item": [
+        {
+          "name": "UC1: Find Companies Backing Away from DEI",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/commitments/changes?change_type=discontinued",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "commitments", "changes"],
+              "query": [
+                {
+                  "key": "change_type",
+                  "value": "discontinued"
+                }
+              ]
+            },
+            "description": "Use Case 1: Identify companies quietly rolling back DEI commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "UC2: Research Specific Company - Step 1 (Get by Ticker)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/ticker/AAPL",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", "ticker", "AAPL"]
+            },
+            "description": "Use Case 2 Step 1: Find company by ticker to get ID"
+          },
+          "response": []
+        },
+        {
+          "name": "UC2: Research Specific Company - Step 2 (Get Profile)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/profiles/{{profile_id}}?include=sources,commitments",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "profiles", "{{profile_id}}"],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "sources,commitments"
+                }
+              ]
+            },
+            "description": "Use Case 2 Step 2: Get complete DEI profile with all data"
+          },
+          "response": []
+        },
+        {
+          "name": "UC3: Compare Tech Companies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/companies/?industry=Information Technology",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "companies", ""],
+              "query": [
+                {
+                  "key": "industry",
+                  "value": "Information Technology"
+                }
+              ]
+            },
+            "description": "Use Case 3 Step 1: Find all tech companies"
+          },
+          "response": []
+        },
+        {
+          "name": "UC3: Industry Trends - Tech",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/industry-trends",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "industry-trends"]
+            },
+            "description": "Use Case 3 Step 2: See which industries are backing away"
+          },
+          "response": []
+        },
+        {
+          "name": "UC4: Find Most Credible Sources",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/sources/?min_reliability=5&per_page=50",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "sources", ""],
+              "query": [
+                {
+                  "key": "min_reliability",
+                  "value": "5"
+                },
+                {
+                  "key": "per_page",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Use Case 4: Get only highest reliability sources (regulatory filings, etc.)"
+          },
+          "response": []
+        },
+        {
+          "name": "UC5: Track Recent Changes - Last 90 Days",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/stance-changes?days=90",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "stance-changes"],
+              "query": [
+                {
+                  "key": "days",
+                  "value": "90"
+                }
+              ]
+            },
+            "description": "Use Case 5: Track commitment changes in last quarter"
+          },
+          "response": []
+        },
+        {
+          "name": "UC6: Active vs Discontinued by Industry",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/industries",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "industries"]
+            },
+            "description": "Use Case 6: See which industries have most active vs discontinued commitments"
+          },
+          "response": []
+        },
+        {
+          "name": "UC7: Investor Due Diligence - Compare Targets",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/{{api_version}}/analytics/compare?company_ids=0a4545e1-f3c5-48f6-bf08-e3854524869f,e3770756-f606-4436-8355-beb5774590e9",
+              "host": ["{{base_url}}"],
+              "path": ["{{api_version}}", "analytics", "compare"],
+              "query": [
+                {
+                  "key": "company_ids",
+                  "value": "0a4545e1-f3c5-48f6-bf08-e3854524869f,e3770756-f606-4436-8355-beb5774590e9"
+                }
+              ]
+            },
+            "description": "Use Case 7: Investor comparing DEI stances of potential investments"
+          },
+          "response": []
+        }
+      ],
+      "description": "Complete workflows for common use cases"
+    }
+  ]
+}

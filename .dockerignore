@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment variables (will be set in Koyeb)
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.claude/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation and archives
+*.md
+README.md
+POSTMAN_GUIDE.md
+API_SUMMARY.md
+REDIS_SETUP.md
+archive/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+test_*.py
+*.test.py
+
+# Postman collections
+*.postman_collection.json
+
+# Database files
+*.sql
+schema.sql
+
+# Logs
+*.log
